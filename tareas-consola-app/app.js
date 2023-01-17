@@ -5,6 +5,7 @@ const {
     pausa, 
     leerInput 
 } = require('./helpers/inquirer');
+const { saveFile } = require('./helpers/saveFile');
 const Tarea = require('./models/Tarea');
 const Tareas = require('./models/Tareas');
 
@@ -23,9 +24,11 @@ const main=async()=>{
                 break;
         
             case '2':
-                console.log(tareas._listado);
+                // console.log(tareas._listado);
+                console.log(tareas.listadoArr);
                 break;
         }
+        // saveFile(tareas.listadoArr);
         // console.log({opt});
         // const tareas = new Tareas();
         // const tarea = new Tarea('comprar huevo');

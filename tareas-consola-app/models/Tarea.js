@@ -6,7 +6,7 @@ class Tarea{
     desc = '';
     endedIn= null;
     
-    constructor(desc){
+    constructor(desc=''){
         this.id = uuidv4();
         this.desc = desc;
     }

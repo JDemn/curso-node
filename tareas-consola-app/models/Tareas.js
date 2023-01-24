@@ -24,6 +24,23 @@ class Tareas {
         const tarea = new Tarea(desc);
         this._listado[tarea.id] = tarea;
     }
+    cargeTareFromArray(tarea=[]){
+        tarea.forEach(tarea=>{
+            this._listado[tarea.id] = tarea;
+        })
+    }
+    listadoCompleto(){
+        //Listado completo de tareas
+        // 1.tareaName :: completada|pendiente
+        console.log('\n');
+        const tareas = this.listadoArr;
+        tareas.forEach((tarea,idx)=>{
+            const indice = idx+1;
+            const {desc,endedIn} = tarea;
+            const status = (endedIn)?'completed'.yellow : 'pending'.bgGreen;
+            console.log(`${indice}. ${desc} :: ${status}`);
+        })
+    }
 }
 
 module.exports = Tareas;

@@ -5,7 +5,7 @@ const {
     pausa, 
     leerInput 
 } = require('./helpers/inquirer');
-const { saveFile } = require('./helpers/saveFile');
+const { saveFile, readDb } = require('./helpers/saveFile');
 const Tarea = require('./models/Tarea');
 const Tareas = require('./models/Tareas');
 
@@ -13,7 +13,12 @@ console.clear();
 const main=async()=>{
     let opt = '';
     const tareas = new Tareas();
-    
+    const tareasDB = readDb()
+    if(tareasDB){
+        //Establecer las tareas
+        tareas.cargeTareFromArray();
+    }
+
     do{
         opt = await inquirerMenu();
         switch (opt) {
@@ -25,10 +30,11 @@ const main=async()=>{
         
             case '2':
                 // console.log(tareas._listado);
-                console.log(tareas.listadoArr);
+                // console.log(tareas.listadoArr);
+                console.log(tareas.listadoCompleto());
                 break;
         }
-        // saveFile(tareas.listadoArr);
+        saveFile(tareas.listadoArr);
         // console.log({opt});
         // const tareas = new Tareas();
         // const tarea = new Tarea('comprar huevo');

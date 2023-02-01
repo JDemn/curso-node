@@ -72,8 +72,52 @@ const leerInput = async(message)=>{
     const { desc } = await inquirer.prompt(question);
     return desc;
 }
+const listadoTareaBorrar = async(tareas = [])=>{
+    // {
+    //     value: '1',
+    //     name: '1. Crear tarea'
+    // }
+    
+    const choices = tareas.map((tarea,id)=>{
+        const idx = `${id+1}`.yellow;
+        return {
+            value : tarea.id,
+            name : `${idx} ${tarea.desc}`
+        }
+    })
+    choices.unshift({
+        value : '0',
+        name : '0.'.yellow + 'cancelar'
+    });
+    const preguntas = [
+        {
+            type: 'list',
+            name : 'id',
+            message: 'Borrar',
+            choices
+        }
+    ]
+    const {id} =await inquirer.prompt(preguntas);
+    return id;
+
+}
+//confirmar si se quiere borrar pregunta
+const confirmar = async (mensaje)=>{
+    const pregunta = [
+        {
+            type : 'confirm',
+            name : 'ok',
+            message : mensaje
+        }
+    ];
+    const  { ok } = await inquirer.prompt(pregunta); 
+    return ok
+}
+
 module.exports = {
     inquirerMenu,
     pausa,
-    leerInput
+    leerInput,
+    listadoTareaBorrar,
+    confirmar
 }
